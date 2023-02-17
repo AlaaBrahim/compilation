@@ -1,0 +1,152 @@
+P → D ; I
+D → D ; D | id @ T
+T → entier 
+I → I ; I | id := E | si E alors I | tant que E faire I
+E → litteral  | nb | id | E % E | E + E | E - E | E * E  | E / E
+
+I → I ; I | id := E
+E → nb | id | E % E | E + E | E - E | E * E  | E / E
+
+
+a:=a+b;
+i:=5;
+
+a   :=   b  +  c
+id opaff id op id
+id opaff is plus id
+
+mov eax,[b]
+mov ebx,[c]
+add eax,ebx
+mov [x],eax
+
+x:=x+1+2+3
+a 1 b c
+mov 
+
+
+
+a:=1;
+b:=2;
+c:=a+b;
+^Z
+<id,a>
+<oppaff,:=>
+<nombre,1>
+<pv,;>
+<id,b>
+<oppaff,:=>
+<nombre,2>
+<pv,;>
+<id,c>
+<oppaff,:=>
+<id,a>
+<op,add>
+<id,b>
+<pv,;>
+
+
+def init(s):
+    if re.findall("<id,[\S\d]+?><oppaff,:=><nombre,[\d]+?>",s):
+            print('yes')
+            
+<id,[a-z\d]+?><oppaff,:=><nombre,[\d]+?>	
+
+
+
+Program -> StatementList
+StatementList -> Statement
+StatementList -> Statement StatementList
+Statement -> Type Identifier = Expression ; 
+Statement -> read Identifier ;
+Statement -> write Expression ;
+Statement -> Identifier = Expression ;
+Type -> int
+Type -> float
+Expression -> Term Expression'
+Expression' -> + Term Expression'
+Expression' ->  - Term Expression'
+Expression' -> ''
+Term -> Factor Term'
+Term' -> * Factor Term'
+Term' -> / Factor Term'
+Term' -> ''
+Factor -> ( Expression )
+Factor -> number
+Factor -> Identifier
+Identifier -> letter
+Identifier -> letter Identifier'
+Identifier' -> letter 
+Identifier' -> digit 
+Identifier' -> letter digit Identifier'
+letter -> a 
+letter -> b 
+letter -> c 
+letter -> z 
+letter -> A 
+letter -> B 
+letter -> C  
+letter -> Z
+digit -> 0 
+digit -> 1 
+digit -> 2 
+digit -> 9
+
+
+-------------------------------------------------------
+
+
+
+
+Programme -> ListeInstructions
+ListeInstructions -> Instruction 
+ListeInstructions -> Instruction ListeInstructions
+Instruction -> Declaration
+Instruction -> Lecture 
+Instruction -> Ecriture 
+Instruction -> Affectation 
+Instruction -> InstructionSi 
+Instruction -> BoucleTantQue
+Declaration -> Type Identificateur = Expression ;
+Lecture -> lire Identificateur ;
+Ecriture -> écrire Expression ;
+Affectation -> Identificateur = Expression ;
+InstructionSi -> si ( Expression Comparateur Expression ) { ListeInstructions } Sinon
+Sinon -> sinon { ListeInstructions }
+Sinon -> ''
+BoucleTantQue -> tant_que ( Expression Comparateur Expression ) { ListeInstructions }
+Type -> entier 
+Type -> réel 
+Type -> booléen
+Expression -> Terme Expression'
+Expression' -> OpAdd Terme Expression'
+Expression' -> ''
+Terme -> Facteur Terme'
+Terme' -> OpMult Facteur Terme'
+Terme' -> ''
+Facteur -> ( Expression )
+Facteur -> nombre 
+Facteur -> Identificateur 
+Facteur -> vrai 
+Facteur -> faux
+Identificateur -> lettre Identificateur' 
+Identificateur' -> '' 
+Identificateur' -> lettre Identificateur' 
+Identificateur' -> chiffre Identificateur'
+OpAdd -> +
+OpAdd -> -
+OpMult -> * 
+OpMult -> /
+Comparateur -> =
+Comparateur -> <> 
+Comparateur -> <
+Comparateur -> > 
+Comparateur -> <= 
+Comparateur -> >=
+lettre -> a
+lettre -> b
+lettre -> c
+lettre -> d
+chiffre -> 0
+chiffre -> 1
+chiffre -> 2
