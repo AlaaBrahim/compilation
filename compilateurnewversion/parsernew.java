@@ -135,13 +135,7 @@ public class parsernew {
 
                 String tabtoken[] = Partiedroite.split(" ");
 
-                for (String string : tabtoken) {
-                    System.out.println("tabtoken : " + string);
-                }
-
                 int taillepile = 2 * tabtoken.length;
-
-                System.out.println("taillepile : " + taillepile);
 
                 for (int i = 0; i < taillepile; i++) {
                     // for (int i = 0; i < Partiedroite.length() * 2; i++) {
@@ -152,7 +146,6 @@ public class parsernew {
                 String sommetpile = analyse.peek();
                 analyse.push(Partiegauche);
                 // String tetesucc = analyse.peek();
-
                 analyse.push(Action(sommetpile, Partiegauche));
 
                 action = "reduce:" + str;
@@ -261,6 +254,7 @@ public class parsernew {
     }
 
     public String Action(String s, String a) {
+        a = a.trim();
         for (int i = 1; i < tableSLR.length; i++)
             if (tableSLR[i][0].equals(s))
                 for (int j = 1; j < tableSLR[0].length; j++)
