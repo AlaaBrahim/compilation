@@ -1,11 +1,6 @@
 package compilateurnewversion;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Stack;
-
 import parserexemple.*;
 
 public class Main {
@@ -22,15 +17,22 @@ public class Main {
 		 * anaLex.fluxCaracteres.get(i));
 		 */
 		System.out.println("***********************Analyse lexical*************************");
-		int taille = listeUniteLexicales.size();
+		int taille = listeUniteLexicales.size() + 1;
 		String tab[] = new String[taille];
-		String ss = " ";
-		for (int i = 0; i < taille; i++)
-			// if (!tab[i].equals(ss))
-			tab[i] = listeUniteLexicales.get(i).getCategorie().toString();
+		String temp;
+		for (int i = 0; i < taille - 1; i++)
+		// if (!tab[i].equals(ss))
+		{
+			temp = listeUniteLexicales.get(i).getCategorie().toString();
+			if (!temp.equals("eof"))
+				tab[i] = temp;
+		}
 
 		for (int i = 0; i < taille; i++)
-			System.out.println(tab[i]);
+			if (tab[i] != null)
+				System.out.println(tab[i]);
+
+		tab[taille - 1] = "$";
 
 		System.out.println("***********************Analyse Syntaxique*************************");
 

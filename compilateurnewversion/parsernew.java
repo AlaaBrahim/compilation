@@ -9,10 +9,9 @@ public class parsernew {
     }
 
     public String[] LRGS = {
-
             "S ->I",
             "S ->E",
-            "I ->i = E",
+            "I ->id oppaff E",
             "E ->T",
             "E ->T + E",
             "E ->T - E",
@@ -23,58 +22,54 @@ public class parsernew {
             "F ->id",
             "F ->- F",
             "F ->+ F",
-            "F ->n"
+            "F ->nombre"
     };
 
     public String[][] tableSLR = {
-            { "Etat", "i", "=", "+", "-", "*", "/", "(", ")", "id", "n", "$", "S", "I", "E", "T", "F", },
-            { "0", "s2", "err", "err", "err", "err", "err", "err", "err", "err", "err", "err", "err", "1", "err", "err",
+            { "Etat", "id", "oppaff", "+", "-", "*", "/", "(", ")", "nombre", "$", "S", "I", "E", "T", "F", },
+            { "0", "s2", "err", "err", "err", "err", "err", "err", "err", "err", "err", "err", "1", "err", "err",
                     "err", },
-            { "1", "err", "err", "err", "err", "err", "err", "err", "err", "err", "err", "acc", "err", "err", "err",
-                    "err", "err", },
+            { "1", "err", "err", "err", "err", "err", "err", "err", "err", "err", "acc", "err", "err", "err", "err",
+                    "err", },
             { "2", "err", "s3", "err", "err", "err", "err", "err", "err", "err", "err", "err", "err", "err", "err",
-                    "err", "err", },
-            { "3", "err", "err", "s10", "s9", "err", "err", "s7", "err", "s8", "s11", "err", "err", "err", "4", "5",
-                    "6", },
-            { "4", "err", "err", "err", "err", "err", "err", "err", "err", "err", "err", "r2", "err", "err", "err",
-                    "err", "err", },
-            { "5", "err", "err", "s12", "s13", "err", "err", "err", "r3", "err", "err", "r3", "err", "err", "err",
-                    "err", "err", },
-            { "6", "err", "err", "r6", "r6", "s14", "s15", "err", "r6", "err", "err", "r6", "err", "err", "err", "err",
                     "err", },
-            { "7", "err", "err", "s10", "s9", "err", "err", "s7", "err", "s8", "s11", "err", "err", "err", "16", "5",
-                    "6", },
-            { "8", "err", "err", "r10", "r10", "r10", "r10", "err", "r10", "err", "err", "r10", "err", "err", "err",
-                    "err", "err", },
-            { "9", "err", "err", "s10", "s9", "err", "err", "s7", "err", "s8", "s11", "err", "err", "err", "err", "err",
+            { "3", "s8", "err", "s10", "s9", "err", "err", "s7", "err", "s11", "err", "err", "err", "4", "5", "6", },
+            { "4", "err", "err", "err", "err", "err", "err", "err", "err", "err", "r2", "err", "err", "err", "err",
+                    "err", },
+            { "5", "err", "err", "s12", "s13", "err", "err", "err", "r3", "err", "r3", "err", "err", "err", "err",
+                    "err", },
+            { "6", "err", "err", "r6", "r6", "s14", "s15", "err", "r6", "err", "r6", "err", "err", "err", "err",
+                    "err", },
+            { "7", "s8", "err", "s10", "s9", "err", "err", "s7", "err", "s11", "err", "err", "err", "16", "5", "6", },
+            { "8", "err", "err", "r10", "r10", "r10", "r10", "err", "r10", "err", "r10", "err", "err", "err", "err",
+                    "err", },
+            { "9", "s8", "err", "s10", "s9", "err", "err", "s7", "err", "s11", "err", "err", "err", "err", "err",
                     "17", },
-            { "10", "err", "err", "s10", "s9", "err", "err", "s7", "err", "s8", "s11", "err", "err", "err", "err",
-                    "err", "18", },
-            { "11", "err", "err", "r13", "r13", "r13", "r13", "err", "r13", "err", "err", "r13", "err", "err", "err",
-                    "err", "err", },
-            { "12", "err", "err", "s10", "s9", "err", "err", "s7", "err", "s8", "s11", "err", "err", "err", "19", "5",
+            { "10", "s8", "err", "s10", "s9", "err", "err", "s7", "err", "s11", "err", "err", "err", "err", "err",
+                    "18", },
+            { "11", "err", "err", "r13", "r13", "r13", "r13", "err", "r13", "err", "r13", "err", "err", "err", "err",
+                    "err", },
+            { "12", "s8", "err", "s10", "s9", "err", "err", "s7", "err", "s11", "err", "err", "err", "19", "5", "6", },
+            { "13", "s8", "err", "s10", "s9", "err", "err", "s7", "err", "s11", "err", "err", "err", "20", "5", "6", },
+            { "14", "s8", "err", "s10", "s9", "err", "err", "s7", "err", "s11", "err", "err", "err", "err", "21",
                     "6", },
-            { "13", "err", "err", "s10", "s9", "err", "err", "s7", "err", "s8", "s11", "err", "err", "err", "20", "5",
-                    "6", },
-            { "14", "err", "err", "s10", "s9", "err", "err", "s7", "err", "s8", "s11", "err", "err", "err", "err", "21",
-                    "6", },
-            { "15", "err", "err", "s10", "s9", "err", "err", "s7", "err", "s8", "s11", "err", "err", "err", "err", "22",
+            { "15", "s8", "err", "s10", "s9", "err", "err", "s7", "err", "s11", "err", "err", "err", "err", "22",
                     "6", },
             { "16", "err", "err", "err", "err", "err", "err", "err", "s23", "err", "err", "err", "err", "err", "err",
-                    "err", "err", },
-            { "17", "err", "err", "r11", "r11", "r11", "r11", "err", "r11", "err", "err", "r11", "err", "err", "err",
-                    "err", "err", },
-            { "18", "err", "err", "r12", "r12", "r12", "r12", "err", "r12", "err", "err", "r12", "err", "err", "err",
-                    "err", "err", },
-            { "19", "err", "err", "err", "err", "err", "err", "err", "r4", "err", "err", "r4", "err", "err", "err",
-                    "err", "err", },
-            { "20", "err", "err", "err", "err", "err", "err", "err", "r5", "err", "err", "r5", "err", "err", "err",
-                    "err", "err", },
-            { "21", "err", "err", "r7", "r7", "err", "err", "err", "r7", "err", "err", "r7", "err", "err", "err", "err",
                     "err", },
-            { "22", "err", "err", "r8", "r8", "err", "err", "err", "r8", "err", "err", "r8", "err", "err", "err", "err",
+            { "17", "err", "err", "r11", "r11", "r11", "r11", "err", "r11", "err", "r11", "err", "err", "err", "err",
                     "err", },
-            { "23", "err", "err", "r9", "r9", "r9", "r9", "err", "r9", "err", "err", "r9", "err", "err", "err", "err",
+            { "18", "err", "err", "r12", "r12", "r12", "r12", "err", "r12", "err", "r12", "err", "err", "err", "err",
+                    "err", },
+            { "19", "err", "err", "err", "err", "err", "err", "err", "r4", "err", "r4", "err", "err", "err", "err",
+                    "err", },
+            { "20", "err", "err", "err", "err", "err", "err", "err", "r5", "err", "r5", "err", "err", "err", "err",
+                    "err", },
+            { "21", "err", "err", "r7", "r7", "err", "err", "err", "r7", "err", "r7", "err", "err", "err", "err",
+                    "err", },
+            { "22", "err", "err", "r8", "r8", "err", "err", "err", "r8", "err", "r8", "err", "err", "err", "err",
+                    "err", },
+            { "23", "err", "err", "r9", "r9", "r9", "r9", "err", "r9", "err", "r9", "err", "err", "err", "err",
                     "err", },
     };
 
@@ -83,7 +78,7 @@ public class parsernew {
     public Stack<String> analyse = new Stack<>();
 
     public Stack<String> stackSymbol = new Stack<>();
-    String ch[] = { "i", "=", "n", "$" };
+    String ch[] = { "id", "oppaff", "nombre", "+", "nombre", "$" };
 
     public String strInput;
 
@@ -180,75 +175,78 @@ public class parsernew {
         System.out.println("********pile     	    Entrée            Action***********");
         this.AfficherSLRnew(tt);
 
-        while (index < tt.length)
+        while (index < tt.length) {
 
-        {
+            if (tt[index] != null) {
 
-            // String s = stackState.peek();
+                // String s = stackState.peek();
 
-            String s = analyse.peek();
+                String s = analyse.peek();
 
-            String act = Action(s, tt[index]);
+                String act = Action(s, tt[index]);
 
-            if (Action(s, tt[index]).charAt(0) == 's') {
+                if (Action(s, tt[index]).charAt(0) == 's') {
 
-                // stackState.push(Action(s, ch[index]).substring(1));
-                // stackSymbol.push(ch[index]);
+                    // stackState.push(Action(s, ch[index]).substring(1));
+                    // stackSymbol.push(ch[index]);
 
-                analyse.push(tt[index]);
-                analyse.push(Action(s, tt[index]).substring(1));
+                    analyse.push(tt[index]);
+                    analyse.push(Action(s, tt[index]).substring(1));
 
-                index++;
-                action = "shift ";
+                    index++;
+                    action = "shift ";
 
-                AfficherSLRnew(tt);
-            }
-            // Réduction
-            else if (Action(s, tt[index]).charAt(0) == 'r') {
-                //
-                String str = LRGS[Integer.parseInt(Action(s, tt[index]).substring(1)) - 1];
-                int pos = str.indexOf('>');
-
-                String tabparties[] = str.split("->");
-
-                String Partiegauche = tabparties[0];
-                // System.out.println("Partiegauche"+Partiegauche);
-
-                String Partiedroite = tabparties[1];
-                // System.out.println("Partiedroite"+Partiedroite);
-
-                String tabtoken[] = Partiedroite.split(" ");
-                int taillepile = tabtoken.length + tabtoken.length;
-
-                for (int i = 0; i < taillepile; i++) {
-
-                    analyse.pop();
-
+                    AfficherSLRnew(tt);
                 }
-                String sommetpile = analyse.peek();
-                analyse.push(Partiegauche);
-                String tetesucc = analyse.peek();
+                // Réduction
+                else if (Action(s, tt[index]).charAt(0) == 'r') {
+                    //
+                    String str = LRGS[Integer.parseInt(Action(s, tt[index]).substring(1))];
+                    int pos = str.indexOf('>');
 
-                analyse.push(Action(sommetpile, Partiegauche));
+                    String tabparties[] = str.split("->");
 
-                action = "reduce:" + str;
-                AfficherSLRnew(tt);
-            }
-            // acceptation
-            else if (Action(s, tt[index]) == "acc") {
-                System.out.println("analyze SLR successfully");
-                break;
-            }
+                    String Partiegauche = tabparties[0];
+                    // System.out.println("Partiegauche"+Partiegauche);
 
-            else
-            // erreur
-            {
+                    String Partiedroite = tabparties[1];
+                    // System.out.println("Partiedroite"+Partiedroite);
 
-                // System.out.println("texterreur"+Action(s,ch[index])+s+ch[index]+index);
-                System.out.println("analyze SLR failled");
-                break;
-            }
+                    String tabtoken[] = Partiedroite.split(" ");
 
+                    int taillepile = 2 * tabtoken.length;
+
+                    for (int i = 0; i < taillepile; i++) {
+                        // for (int i = 0; i < Partiedroite.length() * 2; i++) {
+
+                        analyse.pop();
+
+                    }
+                    String sommetpile = analyse.peek();
+                    analyse.push(Partiegauche);
+                    // String tetesucc = analyse.peek();
+                    analyse.push(Action(sommetpile, Partiegauche));
+
+                    action = "reduce:" + str;
+                    AfficherSLRnew(tt);
+                }
+                // acceptation
+                else if (Action(s, tt[index]) == "acc") {
+                    System.out.println("analyze SLR successfully");
+                    break;
+                }
+
+                else
+                // erreur
+                {
+
+                    // System.out.println("texterreur"+Action(s,ch[index])+s+ch[index]+index);
+                    System.out.println("analyze SLR failled");
+                    break;
+                }
+
+            } else
+                index++;
         }
 
     }
@@ -279,22 +277,14 @@ public class parsernew {
     public void AfficherSLRnew(String[] tt) {
         // SLR
 
-        String ss = "-------";
-        String ss1 = "-------";
-        int taillepile = analyse.size();
-        int taillepilediv2 = taillepile / 2;
-        for (int i = 0; i < taillepilediv2; i++)
-            ss = ss + "-------";
-        int tailleinput = tt.length;
-        for (int i = 0; i < tailleinput; i++)
-            ss1 = ss1 + "-------";
-
         strInput = "";
-        for (int i = index; i < tt.length; i++)
-            strInput = strInput + tt[i];
+        for (int i = index; i < tt.length; i++) {
+            if (tt[i] != null)
+                strInput = strInput + tt[i] + " ";
+        }
 
-        System.out.printf("%s", analyse + ss1);
-        System.out.printf("%s", strInput + ss);
+        System.out.printf("%-50.50s", analyse);
+        System.out.printf("%-30.30s", strInput);
         System.out.printf("%s", action);
         System.out.println();
     }
