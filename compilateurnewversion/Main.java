@@ -21,9 +21,9 @@ public class Main {
 				tab[i] = temp;
 		}
 
-		// for (int i = 0; i < taille; i++)
-		// if (tab[i] != null)
-		// System.out.println(tab[i]);
+		for (int i = 0; i < taille; i++)
+			if (tab[i] != null)
+				System.out.println(tab[i]);
 
 		tab[taille - 1] = "$";
 

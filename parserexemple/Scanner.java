@@ -23,9 +23,10 @@ public class Scanner {
     private int indiceCourant;
     private char caractereCourant;
     private boolean eof;
-    private ArrayList<String> tableMotsCles = new ArrayList<String>(Arrays.asList("si", "alors", "sinon", "tant_que",
+    private ArrayList<String> tableMotsCles = new ArrayList<String>(Arrays.asList("si", "alors", "sinon", "tantque",
             "lire", "ecrire", "entier", "reel", "booleen", "vrai", "faux", "faire"));
     private ArrayList<String> tableIds = new ArrayList<String>();
+    private UniteLexicale lastType;
 
     public Scanner() {
         this("");
@@ -101,25 +102,32 @@ public class Scanner {
         if (caractereCourant == '<' || caractereCourant == '>' || caractereCourant == '=')
             return getOPPRel();
 
-        if (caractereCourant == '%' || caractereCourant == '*' || caractereCourant == '+' || caractereCourant == '-'
-                || caractereCourant == '/')
-            return getOP();
+        if (caractereCourant == '*' || caractereCourant == '/')
+            return getOPMult();
+
+        if (caractereCourant == '+' || caractereCourant == '-')
+            return getOPAdd();
 
         return null;
     }
 
-    public UniteLexicale getOP() {
+    public UniteLexicale getOPMult() {
         switch (caractereCourant) {
-            case '%':
-                return new UniteLexicale(Categorie.OP, "mod");
             case '*':
-                return new UniteLexicale(Categorie.OP, "mult");
-            case '+':
-                return new UniteLexicale(Categorie.OP, "add");
-            case '-':
-                return new UniteLexicale(Categorie.OP, "sub");
+                return new UniteLexicale(Categorie.OPMult, "mult");
             case '/':
-                return new UniteLexicale(Categorie.OP, "div");
+                return new UniteLexicale(Categorie.OPMult, "div");
+            default:
+                return null;
+        }
+    }
+
+    public UniteLexicale getOPAdd() {
+        switch (caractereCourant) {
+            case '+':
+                return new UniteLexicale(Categorie.OPAdd, "add");
+            case '-':
+                return new UniteLexicale(Categorie.OPAdd, "sub");
             default:
                 return null;
         }
@@ -148,16 +156,20 @@ public class Scanner {
                     if (tableMotsCles.contains(sb.toString()))
                         return getMotCle(sb.toString());
                     else {
-                        if (!tableIds.contains(sb.toString()))
+                        if (!tableIds.contains(sb.toString())) {
                             tableIds.add(sb.toString());
+                            tableIds.add(lastType.getCategorie().toString());
+                        }
                         return new UniteLexicale(Categorie.ID, sb.toString());
                     }
                 case 3:
                     if (tableMotsCles.contains(sb.toString()))
                         return getMotCle(sb.toString());
                     else {
-                        if (!tableIds.contains(sb.toString()))
+                        if (!tableIds.contains(sb.toString())) {
                             tableIds.add(sb.toString());
+                            tableIds.add(lastType.getCategorie().toString());
+                        }
                         return new UniteLexicale(Categorie.ID, sb.toString());
                     }
             }
@@ -167,11 +179,14 @@ public class Scanner {
     private UniteLexicale getMotCle(String motCle) {
         switch (motCle) {
             case "entier":
-                return new UniteLexicale(Categorie.entier, "0");
+                lastType = new UniteLexicale(Categorie.type, "0");
+                return lastType;
             case "reel":
-                return new UniteLexicale(Categorie.reel, "0");
-            case "bool":
-                return new UniteLexicale(Categorie.booleen, "0");
+                lastType = new UniteLexicale(Categorie.type, "0");
+                return lastType;
+            case "booleen":
+                lastType = new UniteLexicale(Categorie.type, "0");
+                return lastType;
             case "si":
                 return new UniteLexicale(Categorie.si, "0");
             case "alors":
@@ -179,7 +194,7 @@ public class Scanner {
             case "sinon":
                 return new UniteLexicale(Categorie.sinon, "0");
             case "tantque":
-                return new UniteLexicale(Categorie.tant_que, "0");
+                return new UniteLexicale(Categorie.tantque, "0");
             case "faire":
                 return new UniteLexicale(Categorie.faire, "0");
             case "lire":
@@ -381,11 +396,19 @@ public class Scanner {
     }
 
     public void printUnitesLexicales() {
+        String unite;
+        System.out.println();
+        System.out.println("Unites lexicales : ");
         for (UniteLexicale uniteLexicale : listeUnitesLexicales) {
-            System.out.println(uniteLexicale);
+            unite = uniteLexicale.toString();
+            if (!unite.equals("<eof,0>"))
+                System.out.println(uniteLexicale);
         }
-        for (int i = 0; i < tableIds.size(); i++) {
-            System.out.println(tableIds.get(i) + " " + i);
+        System.out.println("\nTable des identificateurs : ");
+        System.out.println();
+        System.out.println();
+        for (int i = 0; i < tableIds.size(); i += 2) {
+            System.out.println(tableIds.get(i) + " " + tableIds.get(i + 1) + " " + i / 2);
         }
     }
 

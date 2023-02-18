@@ -22,6 +22,7 @@ public enum Categorie {
     booleen,
     vrai,
     faux,
+    faire,
     ;
 
     /*
