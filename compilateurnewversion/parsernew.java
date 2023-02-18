@@ -266,22 +266,12 @@ public class parsernew {
 
     public void AfficherSLR() {
         // SLR
-        String ss = "-------";
-        String ss1 = "-------";
-        int taillepile = analyse.size();
-        int taillepilediv2 = taillepile / 2;
-        for (int i = 0; i < taillepilediv2; i++)
-            ss = ss + "-------";
-        int tailleinput = ch.length;
-        for (int i = 0; i < tailleinput; i++)
-            ss1 = ss1 + "-------";
-
         strInput = "";
         for (int i = index; i < ch.length; i++)
             strInput = strInput + ch[i];
 
-        System.out.printf("%s", analyse + ss1);
-        System.out.printf("%s", strInput + ss);
+        System.out.printf("%-50.50s", analyse);
+        System.out.printf("%-30.30s", strInput);
         System.out.printf("%s", action);
         System.out.println();
     }
