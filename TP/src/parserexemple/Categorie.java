@@ -9,9 +9,20 @@ public enum Categorie {
     PV,
     OPPAff,
     OPPRel,
-    CARACTERE,
     OP,
-    OPType,
+    OpType,
+    si,
+    alors,
+    sinon,
+    tant_que,
+    lire,
+    ecrire,
+    entier,
+    reel,
+    booleen,
+    vrai,
+    faux,
+    faire,
     ;
 
     /*

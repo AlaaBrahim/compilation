@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import parserexemple.Categorie;
 
@@ -18,9 +19,13 @@ Alors que des éléments peuvent être ajoutés et supprimés d'un ArrayListfich
 
 public class Scanner {
     private ArrayList<Character> fluxCaracteres;
+    private ArrayList<UniteLexicale> listeUnitesLexicales = new ArrayList<UniteLexicale>();
     private int indiceCourant;
     private char caractereCourant;
     private boolean eof;
+    private ArrayList<String> tableMotsCles = new ArrayList<String>(Arrays.asList("si", "alors", "sinon", "tant_que",
+            "lire", "ecrire", "entier", "reel", "booleen", "vrai", "faux", "faire"));
+    private ArrayList<String> tableIds = new ArrayList<String>();
 
     public Scanner() {
         this("");
@@ -46,12 +51,10 @@ public class Scanner {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // for (int i = 0; i < fluxCaracteres.size(); i++)
-        // System.out.println(lexemeSuivant());
+
     }
 
     public ArrayList<UniteLexicale> getUnitesLexicales() {
-        ArrayList<UniteLexicale> listeUnitesLexicales = new ArrayList<UniteLexicale>();
 
         for (int i = 0; i < fluxCaracteres.size(); i++) {
             listeUnitesLexicales.add(lexemeSuivant());
@@ -90,7 +93,7 @@ public class Scanner {
             return getOPPAff();
 
         if (caractereCourant == '@')
-            return new UniteLexicale(Categorie.OPType, "@");
+            return new UniteLexicale(Categorie.OpType, "@");
 
         if (caractereCourant == ';')
             return new UniteLexicale(Categorie.PV, ";");
@@ -142,11 +145,55 @@ public class Scanner {
                     break;
                 case 2:
                     reculer();
-                    return new UniteLexicale(Categorie.ID, sb.toString());
+                    if (tableMotsCles.contains(sb.toString()))
+                        return getMotCle(sb.toString());
+                    else {
+                        if (!tableIds.contains(sb.toString()))
+                            tableIds.add(sb.toString());
+                        return new UniteLexicale(Categorie.ID, sb.toString());
+                    }
                 case 3:
-                    return new UniteLexicale(Categorie.ID, sb.toString());
+                    if (tableMotsCles.contains(sb.toString()))
+                        return getMotCle(sb.toString());
+                    else {
+                        if (!tableIds.contains(sb.toString()))
+                            tableIds.add(sb.toString());
+                        return new UniteLexicale(Categorie.ID, sb.toString());
+                    }
             }
         }
+    }
+
+    private UniteLexicale getMotCle(String motCle) {
+        switch (motCle) {
+            case "entier":
+                return new UniteLexicale(Categorie.entier, "0");
+            case "reel":
+                return new UniteLexicale(Categorie.reel, "0");
+            case "bool":
+                return new UniteLexicale(Categorie.booleen, "0");
+            case "si":
+                return new UniteLexicale(Categorie.si, "0");
+            case "alors":
+                return new UniteLexicale(Categorie.alors, "0");
+            case "sinon":
+                return new UniteLexicale(Categorie.sinon, "0");
+            case "tantque":
+                return new UniteLexicale(Categorie.tant_que, "0");
+            case "faire":
+                return new UniteLexicale(Categorie.faire, "0");
+            case "lire":
+                return new UniteLexicale(Categorie.lire, "0");
+            case "ecrire":
+                return new UniteLexicale(Categorie.ecrire, "0");
+            case "vrai":
+                return new UniteLexicale(Categorie.vrai, "0");
+            case "faux":
+                return new UniteLexicale(Categorie.faux, "0");
+            default:
+                return null;
+        }
+
     }
 
     public UniteLexicale getNombre() {
@@ -331,6 +378,15 @@ public class Scanner {
     public String toString() {
         // TODO Auto-generated method stub
         return fluxCaracteres.toString();
+    }
+
+    public void printUnitesLexicales() {
+        for (UniteLexicale uniteLexicale : listeUnitesLexicales) {
+            System.out.println(uniteLexicale);
+        }
+        for (int i = 0; i < tableIds.size(); i++) {
+            System.out.println(tableIds.get(i) + " " + i);
+        }
     }
 
     public static void main(String[] args) {

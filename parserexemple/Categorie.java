@@ -11,6 +11,17 @@ public enum Categorie {
     OPPRel,
     OP,
     OpType,
+    si,
+    alors,
+    sinon,
+    tant_que,
+    lire,
+    ecrire,
+    entier,
+    reel,
+    booleen,
+    vrai,
+    faux,
     ;
 
     /*

@@ -9,13 +9,6 @@ public class Main {
 		Scanner anaLex = new Scanner("a");
 		ArrayList<UniteLexicale> listeUniteLexicales = anaLex.getUnitesLexicales();
 
-		/*
-		 * System.out.println("remplissage du tableaullll");
-		 * for( int i=0; i<anaLex.fluxCaracteres.size();i++)
-		 * 
-		 * System.out.println(" " +
-		 * anaLex.fluxCaracteres.get(i));
-		 */
 		System.out.println("***********************Analyse lexical*************************");
 		int taille = listeUniteLexicales.size() + 1;
 		String tab[] = new String[taille];
@@ -28,11 +21,13 @@ public class Main {
 				tab[i] = temp;
 		}
 
-		for (int i = 0; i < taille; i++)
-			if (tab[i] != null)
-				System.out.println(tab[i]);
+		// for (int i = 0; i < taille; i++)
+		// if (tab[i] != null)
+		// System.out.println(tab[i]);
 
 		tab[taille - 1] = "$";
+
+		anaLex.printUnitesLexicales();
 
 		System.out.println("***********************Analyse Syntaxique*************************");
 
