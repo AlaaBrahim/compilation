@@ -13,6 +13,10 @@ public class UniteLexicale {
         return categorie;
     }
 
+    public Object getLexeme() {
+        return lexeme;
+    }
+
     public String toString() {
         return "<" + categorie.toString() + "," + lexeme + ">";
     }

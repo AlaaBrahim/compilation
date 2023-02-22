@@ -24,7 +24,7 @@ public class Scanner {
     private char caractereCourant;
     private boolean eof;
     private ArrayList<String> tableMotsCles = new ArrayList<String>(Arrays.asList("si", "alors", "sinon", "tantque",
-            "lire", "ecrire", "entier", "reel", "booleen", "vrai", "faux", "faire"));
+            "lire", "ecrire", "entier", "reel", "booleen", "vrai", "faux", "faire", "fsi", "ftantque"));
     private ArrayList<String> tableIds = new ArrayList<String>();
     private UniteLexicale lastType;
 
@@ -158,7 +158,7 @@ public class Scanner {
                     else {
                         if (!tableIds.contains(sb.toString())) {
                             tableIds.add(sb.toString());
-                            tableIds.add(lastType.getCategorie().toString());
+                            tableIds.add(lastType.getLexeme().toString());
                         }
                         return new UniteLexicale(Categorie.ID, sb.toString());
                     }
@@ -168,7 +168,7 @@ public class Scanner {
                     else {
                         if (!tableIds.contains(sb.toString())) {
                             tableIds.add(sb.toString());
-                            tableIds.add(lastType.getCategorie().toString());
+                            tableIds.add(lastType.getLexeme().toString());
                         }
                         return new UniteLexicale(Categorie.ID, sb.toString());
                     }
@@ -179,13 +179,13 @@ public class Scanner {
     private UniteLexicale getMotCle(String motCle) {
         switch (motCle) {
             case "entier":
-                lastType = new UniteLexicale(Categorie.type, "0");
+                lastType = new UniteLexicale(Categorie.type, "entier");
                 return lastType;
             case "reel":
-                lastType = new UniteLexicale(Categorie.type, "0");
+                lastType = new UniteLexicale(Categorie.type, "reel");
                 return lastType;
             case "booleen":
-                lastType = new UniteLexicale(Categorie.type, "0");
+                lastType = new UniteLexicale(Categorie.type, "booleen");
                 return lastType;
             case "si":
                 return new UniteLexicale(Categorie.si, "0");
@@ -193,8 +193,12 @@ public class Scanner {
                 return new UniteLexicale(Categorie.alors, "0");
             case "sinon":
                 return new UniteLexicale(Categorie.sinon, "0");
+            case "fsi":
+                return new UniteLexicale(Categorie.fsi, "0");
             case "tantque":
                 return new UniteLexicale(Categorie.tantque, "0");
+            case "ftantque":
+                return new UniteLexicale(Categorie.ftantque, "0");
             case "faire":
                 return new UniteLexicale(Categorie.faire, "0");
             case "lire":

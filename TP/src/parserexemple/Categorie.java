@@ -25,6 +25,8 @@ public enum Categorie {
     vrai,
     faux,
     faire,
+    fsi,
+    ftantque,
     ;
 
     /*

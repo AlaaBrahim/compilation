@@ -109,14 +109,14 @@ Instruction -> InstructionSi
 Instruction -> BoucleTantQue
 Declaration -> Type Identificateur = Expression ;
 Lecture -> lire Identificateur ;
-Ecriture -> écrire Expression ;
+Ecriture -> ecrire Expression ;
 Affectation -> Identificateur = Expression ;
 InstructionSi -> si ( Expression Comparateur Expression ) { ListeInstructions } Sinon
 Sinon -> sinon { ListeInstructions }
 Sinon -> ''
 BoucleTantQue -> tant_que ( Expression Comparateur Expression ) { ListeInstructions }
 Type -> entier 
-Type -> réel 
+Type -> reel 
 Type -> booléen
 Expression -> Terme Expression'
 Expression' -> OpAdd Terme Expression'
@@ -152,19 +152,18 @@ chiffre -> 1
 chiffre -> 2
 
 
-type id nombre pv type id nombre pv si id opprel id alors id oppaff nombre pv sinon id oppaff nombre pv pv
 
 P -> LI
-LI -> I pv LI
+LI -> I LI
 LI -> ''
 I -> D
-I -> lire id  
-I -> ecrire E  
-I -> id oppaff E  
-I -> si E opprel E alors LI sinon LI 
-I -> si E opprel E alors LI
-I -> tantque E faire LI
-D -> type id E 
+I -> lire id pv
+I -> ecrire E pv
+I -> id oppaff E pv
+I -> si E opprel E alors LI sinon LI fsi
+I -> si E opprel E alors LI fsi
+I -> tantque E faire LI ftantque
+D -> type id E
 E -> T E'
 E' -> OPadd T E'
 E' -> ''
@@ -173,6 +172,10 @@ T' -> OPmult F T'
 T' -> ''
 F -> ( E )
 F -> nombre 
-F -> id 
+F -> id
 F -> vrai 
 F -> faux
+
+
+si id opprel id alors id oppaff nombre pv fsi
+si i < a alors b:=5 ; fsi
