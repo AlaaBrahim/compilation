@@ -23,7 +23,8 @@ public class Main {
 
 		for (int i = 0; i < taille; i++)
 			if (tab[i] != null)
-				System.out.println(tab[i]);
+				System.out.print(tab[i] + " ");
+		System.out.println();
 
 		tab[taille - 1] = "$";
 

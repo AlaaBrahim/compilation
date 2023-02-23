@@ -178,4 +178,8 @@ F -> faux
 
 
 si id opprel id alors id oppaff nombre pv fsi
+
+entier i 0;
+entier a 5;
+entier b 1;
 si i < a alors b:=5 ; fsi
